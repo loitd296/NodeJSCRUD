@@ -94,6 +94,34 @@ router.get('/delete/:id', (req, res) => {
     })
 })
 
+router.post('/doSearch', async (req, res) => {
+    let client = await MongoClient.connect(uri,{
+        useUnifiedTopology: true
+    });
+    let db = client.db('EmployeeDB');
+    let collection = db.collection('Employees');
+
+    let name = new RegExp(req.body.search);
+
+    var condition = {
+        'fullName': fullName
+    }
+
+    var employee = await collection.find(condition).toArray();
+
+    const template = handlebars.compile(fs.readFileSync('views/employee/list', 'utf8'));
+    const result = template ({
+        employee3: employees
+    }, {
+        allowProtoMethodsByDefault: false,
+        allowProtoPropertiesByDefault: false
+    })
+
+    res.render('view/employees/list', {
+        content: result
+    })
+})
+
 function handleValidationError(err, body) {
     for (field in err.errors) {
         switch (err.errors[field].path) {
