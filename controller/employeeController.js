@@ -104,14 +104,14 @@ router.post('/doSearch', async (req, res) => {
     let name = new RegExp(req.body.search);
 
     var condition = {
-        'fullName': fullName
+        'name': name
     }
 
     var employee = await collection.find(condition).toArray();
 
     const template = handlebars.compile(fs.readFileSync('views/employee/list', 'utf8'));
     const result = template ({
-        employee3: employees
+        employee: employees
     }, {
         allowProtoMethodsByDefault: false,
         allowProtoPropertiesByDefault: false
