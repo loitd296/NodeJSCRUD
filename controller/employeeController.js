@@ -117,7 +117,7 @@ router.post('/doSearch', async (req, res) => {
         allowProtoPropertiesByDefault: false
     })
 
-    res.render('view/employees/list', {
+    res.render('layouts/mainLayout.hbs', {
         content: result
     })
 })
