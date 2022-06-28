@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const url = "mongodb://localhost:27017/EmployeeDB";
+const url = "mongodb+srv://loipi879:LYiqGJT81YY3Iber@cluster0.exo72.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(url,{useNewUrlParser:true},(err) => {
     if(!err){ console.log("MongoDB Connection Succeeded");}
     else{
